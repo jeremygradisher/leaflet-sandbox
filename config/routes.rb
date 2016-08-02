@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'mappanes', to: 'mappanes#index'
+
+  get 'nongeo', to: 'nongeo#index'
+
+  get 'layergroups', to: 'layergroups#index'
+
   get 'choropleth', to: 'choropleth#index'
 
   get 'custommarkers', to: 'custommarkers#index'

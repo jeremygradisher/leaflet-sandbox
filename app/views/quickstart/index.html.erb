@@ -1,10 +1,25 @@
 <h1>Leaflet first test</h1>
 <h3>This is from the quick start guide: <a href="http://leafletjs.com/examples/quick-start.html" target="_blank">http://leafletjs.com/examples/quick-start.html</a></h3>
 
-<div id="mapid"></div>
+<p>Added this with commented notes within source. I have a pretty good understanding of what is going here.
+<br>***Special note - this shows how to produce coords from clicking the map! I shows how to draw shapes,
+add markers and pop-ups.</p>
+
+<!-- Put a div element with a certain id where you want your map to be - 
+Make sure the map container has a defined height, for example by setting it in CSS -->
+<div id="mapid" style="height: 300px;"></div>
 
 <script>
+    //initialize the map and set its view to our chosen geographical coordinates and a zoom level
     var mymap = L.map('mapid').setView([51.505, -0.09], 13);
+    
+    //Note that setView call also returns the map object — most Leaflet methods act like this 
+    //when they don’t return an explicit value, which allows convenient jQuery-like method chaining.
+    
+    
+    //Next we’ll add a Mapbox Streets tile layer to our map. 
+    //Creating a tile layer usually involves setting the URL template for the tile images (get yours at Mapbox), 
+    //the attribution text and the maximum zoom level of the layer
     
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
@@ -13,26 +28,45 @@
     accessToken: 'pk.eyJ1IjoiamVyZW15Z3JhZGlzaGVyIiwiYSI6ImNpcjZ0MW80ZjAwcHBnNG05czdvYjNldnQifQ.WnJSnQMW49H3AWeaLDKeqQ'
     }).addTo(mymap);
     
+    //Make sure all the code is called after the div and leaflet.js inclusion -->
+    
+    //add a marker -->
     var marker = L.marker([51.5, -0.09]).addTo(mymap);
+    
+    //Adding a circle is the same (except for specifying the radius in meters as a second argument), 
+    //but lets you control how it looks by passing options as the last argument when creating the object: 
     
     var circle = L.circle([51.508, -0.11], 500, {
     color: 'red',
     fillColor: '#f03',
     fillOpacity: 0.5
     }).addTo(mymap);
-
+    
+    //Adding a polygon -->
     var polygon = L.polygon([
     [51.509, -0.08],
     [51.503, -0.06],
     [51.51, -0.047]
     ]).addTo(mymap);
     
+    //add three popups using their variable names -->
     marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
     circle.bindPopup("I am a circle.");
     polygon.bindPopup("I am a polygon.");
     
-    var popup = L.popup();
-
+    //this is a standalone popup
+    //use openOn instead of addTo because it handles automatic closing of a previously opened popup 
+    //when opening a new one which is good for usability.
+    var popup = L.popup()
+    .setLatLng([51.5, -0.09])
+    .setContent("I am a standalone popup.")
+    .openOn(mymap);
+    
+    //Every time something happens in Leaflet, e.g. user clicks on a marker or map zoom changes, 
+    //the corresponding object sends an event which you can subscribe to with a function. 
+    //It allows you to react to user interaction:
+    
+    //create function - example using a popup to show you the latlng of where you clicked on the map -->
     function onMapClick(e) {
         popup
             .setLatLng(e.latlng)
@@ -40,6 +74,7 @@
             .openOn(mymap);
     }
     
+    //call function -->
     mymap.on('click', onMapClick);
 </script>
 <br><br>
