@@ -1,0 +1,2 @@
+module ChoroplethHelper
+end

@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  get 'choropleth', to: 'choropleth#index'
+
+  get 'custommarkers', to: 'custommarkers#index'
+
+  get 'geojson', to: 'geojson#index'
+
+  get 'quickstart', to: 'quickstart#index'
+
   get 'users/index'
 
   get 'users/show'
