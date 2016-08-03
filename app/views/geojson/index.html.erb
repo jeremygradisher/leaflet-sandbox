@@ -1,10 +1,24 @@
 <h1>Geojson Leaflet Tutorial</h1>
 <p>Find me: <a href="http://leafletjs.com/examples/geojson.html" target="_blank">http://leafletjs.com/examples/geojson.html</a></p>
+<p>GeoJSON is a format for encoding a variety of geographic data structures. 
+A GeoJSON object may represent a geometry, a feature, or a collection of features. 
+GeoJSON supports the following geometry types: Point, LineString, Polygon, MultiPoint, 
+MultiLineString, MultiPolygon, and GeometryCollection. Features in GeoJSON contain a 
+geometry object and additional properties, and a feature collection represents a list of features.</p>
 
+<!-- create and interact with map vectors created from GeoJSON objects. -->
+<!-- here I am setting the map div -->
 <div id="map" style="height: 400px"></div>
 
 <!-- In th example they had the first script here in a seperate file -->
 <script>
+//Leaflet supports all of the GeoJSON types above, but Features and FeatureCollections 
+//work best as they allow you to describe features with a set of properties. We can even 
+//use these properties to style our Leaflet vectors. Here's a few examples of a simple GeoJSON feature:
+
+//here is a bunch of features that are being added to the map
+//Features in GeoJSON contain a geometry object and additional properties, 
+//and a feature collection represents a list of features.
     var freeBus = {
     "type": "FeatureCollection",
     "features": [
@@ -243,6 +257,8 @@ var campus = {
     }
 };
 
+
+//Here's an example of a simple GeoJSON feature:
 var coorsField = {
     "type": "Feature",
     "properties": {
@@ -256,8 +272,10 @@ var coorsField = {
 </script>
 
 <script>
+    //here we are declaring the map, setting the center point and the zoom
 	var map = L.map('map').setView([39.74739, -105], 13);
 
+    
 	L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpandmbXliNDBjZWd2M2x6bDk3c2ZtOTkifQ._QA7i5Mpkd_m30IGElHziw', {
 		maxZoom: 18,
 		attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, ' +
@@ -266,6 +284,7 @@ var coorsField = {
 		id: 'mapbox.light'
 	}).addTo(map);
 
+    //here I am setting an icon (custom marker) on the map
 	var baseballIcon = L.icon({
 		iconUrl: '/images/baseball-marker.png',
 		iconSize: [32, 37],
@@ -273,6 +292,8 @@ var coorsField = {
 		popupAnchor: [0, -28]
 	});
 
+    //The onEachFeature option is a function that gets called on each feature before adding it to a 
+    //GeoJSON layer. A common reason to use this option is to attach a popup to features when they are clicked.
 	function onEachFeature(feature, layer) {
 		var popupContent = "<p>I started out as a GeoJSON " +
 				feature.geometry.type + ", but now I'm a Leaflet vector!</p>";
@@ -284,6 +305,12 @@ var coorsField = {
 		layer.bindPopup(popupContent);
 	}
 
+    //GeoJSON objects are added to the map through a GeoJSON layer.
+    //Points are handled differently than polylines and polygons. 
+    //By default simple markers are drawn for GeoJSON Points. 
+    //We can alter this by passing a pointToLayer function in a GeoJSON options object 
+    //when creating the GeoJSON layer. This function is passed a LatLng and should return 
+    //an instance of ILayer, in this case likely a Marker or CircleMarker.
 	L.geoJson([bicycleRental, campus], {
 
 		style: function (feature) {
@@ -304,6 +331,7 @@ var coorsField = {
 		}
 	}).addTo(map);
 
+    //GeoJSON objects are added to the map through a GeoJSON layer.
 	L.geoJson(freeBus, {
 
 		filter: function (feature, layer) {
@@ -317,6 +345,7 @@ var coorsField = {
 		onEachFeature: onEachFeature
 	}).addTo(map);
 
+    //GeoJSON objects are added to the map through a GeoJSON layer.
 	var coorsLayer = L.geoJson(coorsField, {
 
 		pointToLayer: function (feature, latlng) {

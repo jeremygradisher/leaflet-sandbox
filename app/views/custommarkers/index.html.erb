@@ -1,34 +1,50 @@
 <h1>Custommarkers Test</h1>
 <p>Find me: <a href="http://leafletjs.com/examples/custom-icons.html" target="_blank">http://leafletjs.com/examples/custom-icons.html</a></p>
-
-<div id="mapid"></div>
+<p>Added this with commented notes within the source. This shows custom icons, 
+createing icon classes containing shared options, 
+create custom icons from a class and use them.</p>
+<!-- This is the div for the map - The id matters as it will be used later 
+and the div must have a height!-->
+<div id="mapid" style="height:400px;"></div>
 
 <script>
+    //set a variable for the map - setting the center point and the zoom
     var mymap = L.map('mapid').setView([51.505, -0.09], 13);
     
+    //Next we’ll add a Mapbox Streets tile layer to our map. 
+    //Creating a tile layer usually involves setting the URL template for the tile images (get yours at Mapbox), 
+    //the attribution text and the maximum zoom level of the layer
     L.tileLayer('https://api.tiles.mapbox.com/v4/{id}/{z}/{x}/{y}.png?access_token={accessToken}', {
     attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
     maxZoom: 18,
     id: 'mapbox.streets',
     accessToken: 'pk.eyJ1IjoiamVyZW15Z3JhZGlzaGVyIiwiYSI6ImNpcjZ0MW80ZjAwcHBnNG05czdvYjNldnQifQ.WnJSnQMW49H3AWeaLDKeqQ'
     }).addTo(mymap);
-
+    
+    //Let’s define our own icon class containing the shared options, 
+    //inheriting from L.Icon! It’s really easy in Leaflet:
     var LeafIcon = L.Icon.extend({
 			options: {
 				shadowUrl: '/images/leaf-shadow.png',
-				iconSize:     [38, 95],
-				shadowSize:   [50, 64],
-				iconAnchor:   [22, 94],
-				shadowAnchor: [4, 62],
-				popupAnchor:  [-3, -76]
+				iconSize:     [38, 95], // size of the icon
+                shadowSize:   [50, 64], // size of the shadow
+                iconAnchor:   [22, 94], // point of the icon which will correspond to marker's location
+                shadowAnchor: [4, 62],  // the same for the shadow
+                popupAnchor:  [-3, -76] // point from which the popup should open relative to the iconAnchor
 			}
 		});
 
-    
+    //Now we can create all three of our leaf icons from this class and use them:
     var greenIcon = new LeafIcon({iconUrl: '/images/leaf-green.png'}),
     redIcon = new LeafIcon({iconUrl: '/images/leaf-red.png'}),
     orangeIcon = new LeafIcon({iconUrl: '/images/leaf-orange.png'});
+    
+    //You may have noticed that we used the new keyword for creating LeafIcon instances. 
+    //So why do all Leaflet classes get created without it? The answer is simple: the real 
+    //Leaflet classes are named with a capital letter (e.g. L.Icon), and they also need to 
+    //be created with new, but there are also shortcuts with lowercase names (L.icon)
 
+    //add the markers, with the custom icons to the map
     L.marker([51.5, -0.09], {icon: greenIcon}).addTo(mymap).bindPopup("I am a green leaf.");
     L.marker([51.495, -0.083], {icon: redIcon}).addTo(mymap).bindPopup("I am a red leaf.");
     L.marker([51.49, -0.1], {icon: orangeIcon}).addTo(mymap).bindPopup("I am an orange leaf.");
