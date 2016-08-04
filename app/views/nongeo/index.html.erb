@@ -1,16 +1,32 @@
 <h1>Non-geographical maps</h1>
 <p>Find me: <a href="http://leafletjs.com/examples/crs-simple/crs-simple.html" target="_blank">http://leafletjs.com/examples/crs-simple/crs-simple.html</a></p>
+<p>
+	Sometimes, maps do not represent things on the surface of the earth and,
+	do not have a concept of geographical latitude and geographical longitude. 
+	Most times this refers to big scanned images, such as lease plans.
+	<br><br>
+	This tutorial has a built-in square coordinate system, as can be seen in the corners. 
+	This will allow us to establish a coordinate system.
 
+</p>
 
 <div id='map' style="height:400px;width:600px;"></div>
 
 <script>
+	//A Leaflet map has one CRS (and one CRS only), that can be changed when creating the map. 
+	//For our game map we’ll use CRS.Simple, which represents a square grid:
+	//In a CRS.Simple, one horizontal map unit is mapped to one horizontal pixel, 
+	//and idem with vertical. This means that the whole map is about 1000x1000 pixels 
+	//big and won’t fit in our HTML container. Luckily, we can set minZoom to values 
+	//lower than zero:
 
 	var map = L.map('map', {
 		crs: L.CRS.Simple,
 		minZoom: -3
 	});
 
+	//If working with [y, x] coordinates with something named L.LatLng doesn’t make much sense to you, 
+	//you can easily create wrappers for them:
 	var yx = L.latLng;
 
 	var xy = function(x, y) {
@@ -19,14 +35,27 @@
 		}
 		return yx(y, x);  // When doing xy(x, y);
 	};
+	//Now we can add a few stars and even a navigation line with [x, y] coordinates! (Shown down the page a bit)
 
+	//Then we can just add a L.ImageOverlay with the starmap image and its approximate bounds:
+	//In this case, the map covers more than 1000x1000 units, but the image is 2315x2315 pixels big
+	//Different cases will call for one pixel = one map unit, or 64 pixels = one map unit, or anything. 
+	//Think in map units in a grid, and then add your layers (L.ImageOverlays, L.Markers and so on) accordingly.
 	var bounds = [xy(-25, -26.5), xy(1023, 1021.5)];
 	var image = L.imageOverlay('/images/uqm_map_full.png', bounds).addTo(map);
 
+	//add some markers
 	var sol      = xy(175.2, 145.0);
 	var mizar    = xy( 41.6, 130.1);
 	var kruegerZ = xy( 13.4,  56.5);
 	var deneb    = xy(218.7,   8.3);
+	
+	//You’ll notice that Sol is at coordinates [145,175] instead of [175,145], 
+	//and the same happens with the map center. Coordinates in CRS.Simple take the form of [y, x] instead of [x, y], 
+	//in the same way Leaflet uses [lat, lng] instead of [lng, lat].
+	
+	//(In technical terms, Leaflet prefers to use [northing, easting] over [easting, northing] - 
+	//the first coordinate in a coordinate pair points “north” and the second points “east”)
 
 	L.marker(     sol).addTo(map).bindPopup(      'Sol');
 	L.marker(   mizar).addTo(map).bindPopup(    'Mizar');
