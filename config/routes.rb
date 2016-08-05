@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'firstlp', to: 'firstlp#index'
+
   get 'mappanes', to: 'mappanes#index'
 
   get 'nongeo', to: 'nongeo#index'
