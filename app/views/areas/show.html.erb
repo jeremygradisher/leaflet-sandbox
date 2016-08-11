@@ -88,7 +88,7 @@
 
 <script>
 var <%= @area.name %>      = yx(<%= @area.coords %>);
-L.marker(<%= @area.name %>).addTo(map).bindPopup('<h3><%= @area.name %></h3><p><%= @area.info %></p>');
+L.marker(<%= @area.name %>).addTo(map).bindPopup('<h3><%= @area.name %> - <%= @area.status %></h3><p><%= @area.info %></p>');
 </script>
 
 <div class="page-header">
