@@ -3,8 +3,7 @@
 
 
 <h3>Here the map exists - The map is added one time manually.</h3>
-<p>I can currently get the marker to appear on the show page, but not all of the markers on the index page.
-The show page only shows that one marker. The index page will need to show all of them.</p>
+<p>I can currently get all of the markers to show on the index page, and the individual marker to show on the show page.</p>
 
 <div id='map' style="height:500px;"></div>
 
@@ -88,6 +87,13 @@ The show page only shows that one marker. The index page will need to show all o
     }
     
     map.on('click', onMapClick);
+</script>
+
+<script>
+<% @areas.each do |area| %>
+var <%= area.name %>      = yx(<%= area.coords %>);
+L.marker(<%= area.name %>).addTo(map).bindPopup('<h3><%= area.name %> - <%= area.status %></h3><p><%= area.info %></p>');
+<% end %>
 </script>
 
 <br style="clear:both;">

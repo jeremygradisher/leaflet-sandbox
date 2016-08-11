@@ -5,9 +5,6 @@ class AreasController < ApplicationController
   # GET /areas.json
   def index
     @areas = Area.all
-
-      
-
   end
 
   # GET /areas/1
