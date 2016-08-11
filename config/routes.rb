@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :areas
   get 'firstlp', to: 'firstlp#index'
 
   get 'mappanes', to: 'mappanes#index'
