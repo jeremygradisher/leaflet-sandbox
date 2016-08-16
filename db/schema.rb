@@ -11,13 +11,28 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160810231139) do
+ActiveRecord::Schema.define(version: 20160815223424) do
 
   create_table "areas", force: :cascade do |t|
     t.string   "name"
     t.text     "info"
     t.string   "status"
     t.string   "coords"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "images", force: :cascade do |t|
+    t.integer  "map_id"
+    t.string   "image"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "maps", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "width"
+    t.integer  "height"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
