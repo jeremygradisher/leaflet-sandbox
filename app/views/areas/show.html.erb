@@ -36,8 +36,10 @@
 	//Think in map units in a grid, and then add your layers (L.ImageOverlays, L.Markers and so on) accordingly.
 	//var bounds = [xy(-25, -26.5), xy(1023, 1021.5)];
 	//var bounds = [[0,0], [753,1000]];
-	var bounds = [xy(0,0), xy(1000,753)];
-	var image = L.imageOverlay('/images/demo-lease-plan.png', bounds).addTo(map);
+	//var bounds = [xy(0,0), xy(1000,753)];
+	var bounds = [xy(0,0), xy(<%= @map.width %>,<%= @map.height %>)];
+	//var image = L.imageOverlay('/images/demo-lease-plan.png', bounds).addTo(map);
+	var image = L.imageOverlay('<%= @image.image_url %>', bounds).addTo(map);
 
 	//add some markers
 	//var suite401      = yx(604, 107);
@@ -106,14 +108,19 @@ L.marker(<%= @area.name %>).addTo(map).bindPopup('<h3><%= @area.name %> - <%= @a
   <dd><%= @area.coords %></dd>
 </dl>
 
-<%= link_to t('.back', :default => t("helpers.links.back")),
-              areas_path, :class => 'btn btn-default'  %>
-<%= link_to t('.edit', :default => t("helpers.links.edit")),
-              edit_area_path(@area), :class => 'btn btn-default' %>
-<%= link_to t('.destroy', :default => t("helpers.links.destroy")),
-              area_path(@area),
-              :method => 'delete',
-              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
-              :class => 'btn btn-danger' %>
 
-<br><br><br>
+<hr style="clear:both;">
+	<div style="width:100%;text-align:center;">
+		<%= link_to '<= Back to Map',
+		              map_path(@map), :class => 'btn btn-default'  %>
+		<%= link_to 'Edit the Area =>',
+		              edit_area_path(@area), :class => 'btn btn-primary' %>
+		<%= link_to 'Delete the Area x',
+		              area_path(@area),
+		              :method => 'delete',
+		              :data => { :confirm => t('.confirm', :default => t("helpers.links.confirm", :default => 'Are you sure?')) },
+		              :class => 'btn btn-danger' %>
+	</div>
+<hr style="clear:both;">
+
+<br><br>

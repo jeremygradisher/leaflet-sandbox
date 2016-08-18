@@ -113,6 +113,7 @@ It is a first step but will not be enough...</p>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:map_id) %></th>
       <th><%= model_class.human_attribute_name(:info) %></th>
       <th><%= model_class.human_attribute_name(:status) %></th>
       <th><%= model_class.human_attribute_name(:coords) %></th>
@@ -125,6 +126,7 @@ It is a first step but will not be enough...</p>
       <tr>
         <td><%= link_to area.id, area_path(area) %></td>
         <td><%= link_to area.name, area_path(area) %></td>
+        <td><%= area.map_id %></td>
         <td><%= area.info %></td>
         <td><%= area.status %></td>
         <td><%= area.coords %></td>

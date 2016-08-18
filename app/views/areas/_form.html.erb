@@ -23,6 +23,33 @@
     <%=f.error_span(:name) %>
   </div>
   <div class="form-group">
+    <div class="col-lg-2">
+    </div>
+    <div class="col-lg-10">
+    <p>*Currently you must manually choose the associated map.</p>
+    </div>
+  </div>
+  
+  <!--
+  <div class="form-group">
+    <%#= f.label :map_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%#= f.text_field :map_id, :class => 'form-control' %>
+    </div>
+    <%#=f.error_span(:map_id) %>
+  </div>
+  -->
+  
+  <div class="form-group">
+    <%= f.label :map_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-2">
+      <%#= f.select :map_id, ['Prospect', 'In Process', 'Complete'], {include_blank:false}, :class => 'form-control' %>
+      <%= collection_select(:area, :map_id, Map.all, :id, :name) %>
+    </div>
+    <%=f.error_span(:map_id) %>
+  </div>
+  
+  <div class="form-group">
     <%= f.label :info, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
       <%= f.text_field :info, :class => 'form-control' %>
@@ -44,11 +71,13 @@
     <%=f.error_span(:coords) %>
   </div>
 
+
+
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">
       <%= f.submit nil, :class => 'btn btn-primary' %>
       <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
-                areas_path, :class => 'btn btn-default' %>
+                maps_path, :class => 'btn btn-default' %>
     </div>
   </div>
 

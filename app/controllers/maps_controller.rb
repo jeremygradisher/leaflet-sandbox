@@ -10,7 +10,11 @@ class MapsController < ApplicationController
   # GET /maps/1
   # GET /maps/1.json
   def show
+    #added this so I can get the image to be used as the map
+    @image = @map.images.first
     @images = @map.images.all
+    #added this next line - trying to figure it out
+    @areas = @map.areas.all
   end
 
   # GET /maps/new
