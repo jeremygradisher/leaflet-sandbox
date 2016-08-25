@@ -81,16 +81,7 @@
 	//marker.bindPopup("<b>Hello world!</b><br>I am a popup.").openPopup();
 
     var popup = L.popup();
-    
-    function onMapClick(e) {
-        popup
-            .setLatLng(e.latlng)
-            .setContent("You clicked the map at " + e.latlng.toString())
-            .openOn(map);
-        change(<%= @area.coords %>);
-    }
-    
-    map.on('click', onMapClick);
+
 </script>
 
 <script>
@@ -117,20 +108,40 @@
     yellowIcon = new mapIcon({iconUrl: '/images/yellow-marker.png'});
 </script>
 
+
+
+
+
 <script>
-var <%= @area.name %>      = yx(<%= @area.coords %>);
-L.marker(<%= @area.name %>, {<% if @area.status == 'Available' %>icon: redIcon<% elsif @area.status == 'Leased'  %>icon: greenIcon <% else %>icon: greenIcon <% end %>}).addTo(map).bindPopup('<h3><%= @area.name %> - <%= @area.status %></h3><p><%= @area.info %></p>');
+//var suite401      = yx(604, 107);
+var <%= 's' + @area.name.gsub(/\W\s?/, "") %>      = yx(<%= @area.coords %>);
+//L.marker(suite401).addTo(map).bindPopup('Suite 401');
+var marker = L.marker(<%= 's' + @area.name.gsub(/\W\s?/, "") %>, {<% if @area.status == 'Available' %>icon: redIcon<% elsif @area.status == 'Leased'  %>icon: greenIcon<% else %>icon: greenIcon<% end %>, draggable: true}).addTo(map).bindPopup('<h3><%= @area.name %> - <%= @area.status %></h3><p><%= @area.info %></p>');
 </script>
+
+<script>
+
+
+	function onMapClick(e) {
+        document.getElementById('area_coords').value = e.latlng.lat + ', ' + e.latlng.lng;
+		marker.setLatLng(e.latlng);
+		updateLatLng(marker.getLatLng().lat, marker.getLatLng().lng);
+		function updateLatLng(lat,lng) {
+		document.getElementById('area_coords').value = e.latlng.lat + ', ' + e.latlng.lng;
+		map.panTo([lat,lng]);
+		}
+    }
+    map.on('click', onMapClick);
+    
+	function onDragend(e) {
+		document.getElementById('area_coords').value = marker.getLatLng().lat + ', ' + marker.getLatLng().lng;
+	}
+    marker.on('dragend', onDragend);
+</script>
+
 
 <hr style="clear:both;">
 
-<div class="form-group">
-    <div class="col-lg-2"></div>
-    <div class="col-lg-10">
-      <p style="font-style: italic;">*This Name field currently needs to start with a letter and have no spaces or the map will break 
-      and you will see a blank space.</p>
-    </div>
-</div>
-
-
 <%= render :partial => 'form' %>
+
+

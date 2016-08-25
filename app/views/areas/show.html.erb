@@ -118,8 +118,8 @@ L.marker(<%#= @area.name %>).addTo(map).bindPopup('<h3><%#= @area.name %> - <%#=
 -->
 
 <script>
-var <%= @area.name %>      = yx(<%= @area.coords %>);
-L.marker(<%= @area.name %>, {<% if @area.status == 'Available' %>icon: redIcon<% elsif @area.status == 'Leased'  %>icon: greenIcon <% else %>icon: greenIcon <% end %>}).addTo(map).bindPopup('<h3><%= @area.name %> - <%= @area.status %></h3><p><%= @area.info %></p>');
+var <%= 's' + @area.name.gsub(/\W\s?/, "") %>      = yx(<%= @area.coords %>);
+L.marker(<%= 's' + @area.name.gsub(/\W\s?/, "") %>, {<% if @area.status == 'Available' %>icon: redIcon<% elsif @area.status == 'Leased'  %>icon: greenIcon <% else %>icon: greenIcon <% end %>}).addTo(map).bindPopup('<h3><%= @area.name %> - <%= @area.status %></h3><p><%= @area.info %></p>');
 </script>
 
 <div class="page-header">
