@@ -43,7 +43,8 @@
 	//var bounds = [xy(-25, -26.5), xy(1023, 1021.5)];
 	//var bounds = [[0,0], [753,1000]];
 	//var bounds = [xy(0,0), xy(1000,753)];
-	var bounds = [xy(0,0), xy(<%= @map.width %>,<%= @map.height %>)];
+	//var bounds = [xy(0,0), xy(<%#= @map.width %>,<%#= @map.height %>)];
+	var bounds = [xy(0,0), xy(<%= @image.width %>,<%= @image.height %>)];
 	//var image = L.imageOverlay('/images/demo-lease-plan.png', bounds).addTo(map);
 	var image = L.imageOverlay('<%= @image.image_url %>', bounds).addTo(map);
 

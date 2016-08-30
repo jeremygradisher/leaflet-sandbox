@@ -50,5 +50,13 @@ class ImageUploader < CarrierWave::Uploader::Base
   # def filename
   #   "something.jpg" if original_filename
   # end
+  process :store_dimensions
 
+  private
+
+  def store_dimensions
+    if file && model
+      model.width, model.height = `identify -format "%wx%h" #{file.path}`.split(/x/)
+    end
+  end
 end

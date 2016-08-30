@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160816182434) do
+ActiveRecord::Schema.define(version: 20160830214247) do
 
   create_table "areas", force: :cascade do |t|
     t.string   "name"
@@ -28,12 +28,12 @@ ActiveRecord::Schema.define(version: 20160816182434) do
     t.string   "image"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string   "width"
+    t.string   "height"
   end
 
   create_table "maps", force: :cascade do |t|
     t.string   "name"
-    t.integer  "width"
-    t.integer  "height"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
