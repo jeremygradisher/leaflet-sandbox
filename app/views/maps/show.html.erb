@@ -137,16 +137,6 @@ L.marker(<%= 's' + area.name.gsub(/\W\s?/, "") %>, {<% if area.status == 'Availa
 
 <br style="clear:both;">
 
-<hr>
-<p>Testing: <%= %><br>
-id: <%= @image.id %><br>
-image: <%= @image.image %><br>
-map_id: <%= @image.map_id %><br>
-width: <%= @image.width %><br>
-height: <%= @image.height %><br>
-</p>
-<hr>
-
 
 <div class="page-header">
   <h1>Areas</h1>
@@ -191,7 +181,7 @@ height: <%= @image.height %><br>
 </table>
 
 <%= link_to 'New Area =>',
-            new_area_path,
+            new_area_path(:map_id => @map),
             :class => 'btn btn-primary' %>
             
             <br><br><br>

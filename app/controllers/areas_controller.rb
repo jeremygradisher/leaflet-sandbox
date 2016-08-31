@@ -20,6 +20,10 @@ class AreasController < ApplicationController
   # GET /areas/new
   def new
     @area = Area.new
+    #testing:
+    @map = Map.find(params[:map_id])
+    @image = @map.images.first
+    @images = @map.images.all
   end
 
   # GET /areas/1/edit

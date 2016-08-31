@@ -101,11 +101,9 @@ L.marker(<%= area.name %>).addTo(map).bindPopup('<h3><%= area.name %> - <%= area
 <br style="clear:both;">
 
 <p style="">Here I can add new areas. It asks for a name, info, status and coords. 
-(The name can not currently start with numbers or have any spaces. WIP)
 Overall this method would allow you to add one image map and many areas. 
 It is a first step but will not be enough...</p>
 
-<p>*In the long run we will need a model Lease Plans or Image Maps or something, then the markers will need to be added with a HABTM association.</p>
 
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
