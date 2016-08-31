@@ -124,7 +124,7 @@ var marker = L.marker(<%= 's' + @area.name.gsub(/\W\s?/, "") %>, {<% if @area.st
 
 
 	function onMapClick(e) {
-        document.getElementById('area_coords').value = e.latlng.lat + ', ' + e.latlng.lng;
+    document.getElementById('area_coords').value = e.latlng.lat + ', ' + e.latlng.lng;
 		marker.setLatLng(e.latlng);
 		updateLatLng(marker.getLatLng().lat, marker.getLatLng().lng);
 		function updateLatLng(lat,lng) {
