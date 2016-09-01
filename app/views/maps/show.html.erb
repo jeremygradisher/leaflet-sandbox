@@ -1,6 +1,10 @@
 <%- model_class = Map -%>
 
-
+<p>
+  *Maps#show - This is an individual Map show page. It acts as an index of the Areas that belong to this Map instance.
+  <br><br>
+  *You can click in and edit any of the areas or create a new Area!
+</p>
 
 <h1 style="text-align:center;"><%= @map.name %></h1>
 
@@ -86,7 +90,7 @@
     function onMapClick(e) {
         popup
             .setLatLng(e.latlng)
-            .setContent("You clicked the map at " + e.latlng.toString() + "<br>Would you like to create a new area? <a href=''>test</a>")
+            .setContent("You clicked the map at " + e.latlng.toString())
             .openOn(map);
     }
     

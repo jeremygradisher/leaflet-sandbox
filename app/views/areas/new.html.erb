@@ -1,10 +1,21 @@
 <%- model_class = Area -%>
+
+<p>
+	*Adding a New Area is simple. Click on the map and you get a new marker. You can drag the marker around
+	to as well. Then name it, add what goes into the pop up with Info and change the status which will 
+	change the color of the marker.<br><br>
+	
+	**I was having an issue making the color change of the marker live on this page. 
+	I moved on but will need to address this in the long run.<br><br>
+	
+	***This uses a slightly different form than the edit form. It had to do with grabbing the map_id param
+	from the url so it undestood which map to use and save into the dbin the field map_id. 
+	Within the edit form the association is grabbed from the database field map_id.
+</p>
+
 <div class="page-header">
   <h1><%=t '.title', :default => [:'helpers.titles.new', 'New %{model}'], :model => model_class.model_name.human.titleize %></h1>
 </div>
-
-
-
 
 <div id='map' style="height:500px;"></div>
 

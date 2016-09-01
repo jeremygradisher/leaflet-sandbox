@@ -1,11 +1,32 @@
-<h1>This is where I am doing some testing...</h1>
-<hr>
-<h2>Sandbox Builds:</h2>
 
-<h3><%= link_to "Maps First Try", maps_path  %></h3>
-<p>Created a Maps model to see if I can create a HABTM association with the Areas model.</p>
-<hr>
+<h2>Sandbox Builds (Learning - All that matters here is <%= link_to "Maps", maps_path  %>):</h2>
 
+<h3><%= link_to "Maps Explanation", maps_path  %> - (Complete for drag and drop markers)</h3>
+<p>Created a Maps model and an Areas model. (Areas are currently markers, that is about to change!). <br>
+A Map has_many :areas, dependent: :destroy and and Area belongs_to :map.
+Fully functional to add markers that change color according to status. Good start. <br>
+I am re-cloning here so that I can take a stab at adding Polygons with another plugin on top of Leaflet: 
+<a href="http://codeofsumit.github.io/leaflet.pm/" target="_blank">http://codeofsumit.github.io/leaflet.pm/</a>
+<br><br>
+<strong>This was very important for the learning of the underlying framework that we are building.</strong><br>
+	<ol>
+		<li>Leaflet base functionality</li>
+		<li>A class that has_many of another class (Map has many Areas)</li>
+		<li>RoR - linking of a class within a class</li>
+		<li>Understanding differences of new and edit forms</li>
+		<li>Saving coodinates from clicks of the mouse to the form</li>
+		<li>instance variables within the controllers</li>
+		<li>using imagemagick to store the maps width/height when uploading</li>
+	</ol>
+
+</p>
+<hr>
+<h3>
+I need to use Maps and Areas in a different way so I need to build new! <br>
+I am changing from dropping markers to drawing polygons:<br>
+<a href="http://codeofsumit.github.io/leaflet.pm/" target="_blank">http://codeofsumit.github.io/leaflet.pm/</a><br>
+The link will be here:</h3>
+<hr>
 <h3><%= link_to "First Lease Plan", firstlp_path  %></h3>
 <p>Here is my first attempt at getting some of the options we need from Leaflet and RoR to work!</p>
 
