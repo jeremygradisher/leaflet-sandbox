@@ -1,8 +1,6 @@
-#Leaflet Sandbox - 07/28/2016
+#Leaflet Sandbox Builds (All that matters here is Maps):
+All tutorials are built with commented code for reference.
 
-This is a spot to test Leaflet!
-
-#Sandbox Builds (Learning - All that matters here is Maps):
 ##Maps Explanation - (Complete for drag and drop markers)
 Created a Maps model and an Areas model. (Areas are currently markers, that is about to change!). 
 A Map has_many :areas, dependent: :destroy and and Area belongs_to :map. Fully functional to add markers that change color according to status. Good start. 
