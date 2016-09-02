@@ -8,8 +8,8 @@ I am re-cloning here so that I can take a stab at adding Polygons with another p
 
 ###This was very important for the learning of the underlying framework that we are building.
 1. Leaflet base functionality
-2. A class that has_many of another class (Map has many Areas)
-3. RoR - linking of a class within a class
+2. A Model that has_many of another Model (Map has many Areas)
+3. RoR - linking of a Model within a Model
 4. Understanding differences of new and edit forms
 5. Saving coodinates from clicks of the mouse to the form
 6. instance variables within the controllers
