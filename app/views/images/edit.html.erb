@@ -2,5 +2,7 @@
 
 <%= render 'form' %>
 
-<%= link_to 'Show', @image %> |
-<%= link_to 'Back', images_path %>
+<%#= link_to 'Show', @image %> |
+<%#= link_to 'Back', images_path %>
+<%= link_to t('.back', :default => t("helpers.links.back")),
+              @image.map, :class => 'btn btn-default'  %>
