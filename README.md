@@ -1,5 +1,6 @@
 #Leaflet Sandbox Builds (All that matters here is Maps):
 All tutorials are built with commented code for reference.
+Updated 01/06/2020 for vulnerabilities.
 
 ##Maps Explanation - (Complete for drag and drop markers)
 Created a Maps model and an Areas model. (Areas are currently markers, that is about to change!). 
